@@ -1,17 +1,38 @@
-export function hpLevelCalculation() {
-    // maximum is 100. if value is higher than 100 set it to 100, otherwise 0.
+export const calHp = (v)=>{
+    const value = Number(v);
+    if(isNaN(v)){return 0 }
+    if(value > 100){ return 100}
+    return value
+};
+
+export const calcStr = (v)=> {
+    const value = v * 50;
+    if (isNaN(value)) {
+        return 0
+    } else {
+        if (value > 100) {
+            return 100
+        } else {
+            return value
+        }
+    }
+};
+
+export function calcHap(hp = 0, dmg = 0, weak = 0) {
+    const hap = (hp / 10 + dmg / 10 + 10 - weak / 100) / 5;
+    return Math.round(hap)
 }
-export function strengthLevelCalculation(attacks) {
-    // use attacks length to multiply by 50, maximum is 100. e.g. if value is 1 set it to 50, 2 set it to 100, otherwise 0.
-}
-export function weaknessLevelCalculation(weaknesses) {
-    // use weaknesses length multiply by 100, maximum is 100. e.g. if value is 1 set it to 100, otherwise 0.
-}
-export function damageLevelCalculation() {
-    // use damage value without symbol of all attacks skill. e.g. 50+ set it to 50, 20* set it to 20, otherwise 0.
-}
-export function happinessLevelCalculation() {
-    // ((HP / 10) + (Damage /10 ) + 10 - (Weakness)) / 5
+
+export function calcWeak(weaknesses = []) {
+    const sumWeak = weaknesses.reduce((prev, cur) => {
+        const v = cur.value;
+        if (typeof v === 'string') {
+            const curNumber = Number(v.replace(/[^0-9]/g, '')) * 100;
+            return prev + curNumber
+        }
+        return prev
+    }, 0);
+    return sumWeak > 100 ? 100 : sumWeak
 }
 
 /*

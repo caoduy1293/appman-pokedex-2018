@@ -1,17 +1,41 @@
 import React, { Component } from 'react'
-import PokedexCard from '../pokedexCard'
+import { connect } from "react-redux";
+import styled from "styled-components";
+
+import {CardPokemon} from "../pokedexCard";
+import {getPokemons, openPopUp, removePokedex, addPokedex} from "../actions";
+
+const OverFLow = styled.div`
+  flex-wrap: wrap;
+  overflow: scroll;
+  height: 85%;
+  z-index: -1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+`;
 
 class PokedexList extends Component {
     render() {
-        const pokemons = [];
+        console.log(this.props.pokedex);
         return (
-            <div>
+            <OverFLow>
                 {
-                    pokemons.map(item => <PokedexCard/>)
+                    this.props.pokedex.map(v => <CardPokemon onDelete={this.props.removePokedex} pokedex={true}
+                                                             key={v.id} {...v} onAdd={this.props.onAddPokedex} />)
                 }
-            </div>
+            </OverFLow>
         )
     }
 }
 
-export default PokedexList
+const mapStateToProps = null;
+
+const mapDisPatchToProps = dispatch => ({
+    removePokedex: (value) => dispatch(removePokedex(value)),
+    onAddPokedex: (value) => dispatch(addPokedex(value))
+});
+
+export default connect(mapStateToProps,mapDisPatchToProps)(PokedexList)
