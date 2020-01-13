@@ -5,17 +5,18 @@ export const getPokemon = createSelector(
     state => state.pokemon,
     state => state.pokedex,
     state => state.search,
-    (pokemon = [], pokedex = [], search = '')=>{
-        if(pokedex.length===0){
+    (pokemon = [], pokedex = [],search = '') => {
+        if(pokedex.length === 0){
             return pokemon
         }
-        const identityPokedex = R.map(({nationalPokedexNumber})=>nationalPokedexNumber)(pokedex);
-        const filterList = R.filter(({nationalPokedexNumber})=>!R.contains(nationalPokedexNumber,identityPokedex),pokemon);
+
+        const pokedexIds = pokedex.map(({id}) => id);
+        const filterList = pokemon.filter(({id}) => pokedexIds.indexOf(id) === -1 );
         if(search){
-            return R.filter(
-                ({name})=>R.indexOf(name,search)>0,
-            )(filterList)
+            return filterList.filter(
+                ({name}) => name.toLowerCase().indexOf(search.toLowerCase()) > -1,
+            )
         }
         return filterList
     }
-)
+);

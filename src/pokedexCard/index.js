@@ -6,15 +6,16 @@ import CuteImg from "../cute.png";
 import {calcHap, calcStr, calcWeak, calHp} from "../util";
 
 const CardWrapper = styled.div`
+  position: relative;
   width: 100%;
-  padding:5px 8px 15px;
-  height:220px;
+  padding: 5px;
   background-color: #f3f4f7;
   display:flex;
-  margin-bottom: 20px;
+  max-height: 220px;
+  margin-bottom: 10px;
   &.pokedex {
     width:45%;
-    margin: 20px;
+    margin: 10px 1%;
   }
   .add{
     display:none;
@@ -30,10 +31,10 @@ const CardWrapper = styled.div`
 
 const CardPicture = styled.div`
   height:100%;
+  display: flex;
   width: 160px;
   img{
     width: 100%;
-    height: 100%;
   }
 `;
 const StatContainer = styled.div`
@@ -48,7 +49,7 @@ const DetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 5px 0;
-  width: 55%;
+  width: 70%;
   h1 {
     margin-top: 0;
     font-family: Gaegu;
@@ -83,10 +84,12 @@ const CuteImgStyle = styled.img`
 
 const AddContent = styled.div`
   color:#dc7777;
-  justify-self:flex-end;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 `;
 
-export const CardPokemon = ({search='', name='', onDelete, isPokedex = false, imageUrl, hp, onAdd, convertedRetreatCost, weaknesses, pokedexIndex})=>{
+export const CardPokemon = ({search='', name='', onDelete, isPokedex = false, imageUrl, hp, onAdd, convertedRetreatCost, weaknesses, cardId})=>{
 
     const hpValue = calHp(hp);
     const str = calcStr(convertedRetreatCost);
@@ -118,8 +121,8 @@ export const CardPokemon = ({search='', name='', onDelete, isPokedex = false, im
                     })}
                 </div>
             </DetailWrapper>
-            {!isPokedex && <AddContent onClick={(e) => onAdd(pokedexIndex)} className="add">ADD</AddContent>}
-            {isPokedex && <AddContent onClick={() => onDelete(pokedexIndex)} className="add">X</AddContent>}
+            {!isPokedex && <AddContent onClick={(e) => onAdd(cardId)} className="add">ADD</AddContent>}
+            {isPokedex && <AddContent onClick={() => onDelete(cardId)} className="add">X</AddContent>}
         </CardWrapper>
     )
 };

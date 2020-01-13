@@ -8,7 +8,7 @@ import {getPokemons, openPopUp, removePokedex, addPokedex} from "../actions";
 const OverFLow = styled.div`
   flex-wrap: wrap;
   overflow: scroll;
-  height: 85%;
+  height: 72%;
   z-index: -1;
   display: -webkit-box;
   display: -webkit-flex;
@@ -19,12 +19,11 @@ const OverFLow = styled.div`
 
 class PokedexList extends Component {
     render() {
-        console.log(this.props.pokedex);
         return (
             <OverFLow>
                 {
-                    this.props.pokedex.map(v => <CardPokemon onDelete={this.props.removePokedex} pokedex={true}
-                                                             key={v.id} {...v} onAdd={this.props.onAddPokedex} />)
+                    this.props.pokedex.map(v => <CardPokemon onDelete={this.props.removePokedex} isPokedex={true}
+                                                             key={v.id} cardId={v.id} {...v} />)
                 }
             </OverFLow>
         )
@@ -34,8 +33,7 @@ class PokedexList extends Component {
 const mapStateToProps = null;
 
 const mapDisPatchToProps = dispatch => ({
-    removePokedex: (value) => dispatch(removePokedex(value)),
-    onAddPokedex: (value) => dispatch(addPokedex(value))
+    removePokedex: (value) => dispatch(removePokedex(value))
 });
 
 export default connect(mapStateToProps,mapDisPatchToProps)(PokedexList)

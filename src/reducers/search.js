@@ -1,6 +1,8 @@
+import {SEARCH_POKEMON} from "../actions";
+
 export default (state = '', {type, payload}) => {
     switch(type) {
-        case 'SET_SEARCH':
+        case SEARCH_POKEMON:
             return payload;
         default:
             return state;

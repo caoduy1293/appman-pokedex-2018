@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import './App.css'
 import { getPokemons, openPopUp } from './actions';
-import PokedexPopUpPage  from './pokedexPopUpPage';
+import PokedexPopUpPage  from './pokemonsPopUpPage';
 import PokedexList from './pokedexList';
 
 const RootSection = styled.div`

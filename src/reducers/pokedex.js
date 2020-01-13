@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import { ADD_POKEDEX, REMOVE_POKEDEX } from "../actions";
 
 export default (state = [], {type, payload}) => {
@@ -6,8 +5,7 @@ export default (state = [], {type, payload}) => {
         case ADD_POKEDEX:
             return [...state, payload];
         case REMOVE_POKEDEX:
-
-            return R.reject(({nationalPokedexNumber})=>nationalPokedexNumber===payload)(state);
+            return state.filter(({id}) => id !== payload);
         default:
             return state;
     }

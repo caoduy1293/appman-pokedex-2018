@@ -20,7 +20,6 @@ display: block;
 `;
 
 export const Container = styled.div`
-  width:100%;
   padding:10px;
   position:relative;
 `;
@@ -30,11 +29,11 @@ export const SearchBox = styled.input`
   position: relative;
   height: 50px;
   font-size: 35px;
-  padding-left:30px;
 `;
 
 export const Icon = styled.img`
-  width:50px; 
+  width:50px;
+  top: 10px;
   position:absolute;
   right:10px;
 `;
@@ -42,20 +41,20 @@ export const Icon = styled.img`
 export const Wrapper = styled.div`
   position: relative;
   height: auto;
-  margin: 40px;
+  height: 80%;
+  margin: 20px 160px;
   width: 100%;
   background-color:#ffffff;
-  overflow: hidden;
 `;
 
 const CardContainer = styled(Container)`
-  padding:15px;
-  height:100%;
+  padding: 0 15px;
+  height:83%;
   overflow: scroll;
 `;
 
 
-class PokedexPopUpPage extends React.Component{
+class PokemonsPopUpPage extends React.Component{
 
     constructor(props) {
         super(props);
@@ -69,8 +68,8 @@ class PokedexPopUpPage extends React.Component{
         }
     };
 
-    onAddPokedex = (value) => {
-        const pokemonIChoose = this.props.pokemon.find(({nationalPokedexNumber}) => nationalPokedexNumber === value);
+    onAddPokedex = (cardId) => {
+        const pokemonIChoose = this.props.pokemon.find(({id}) => id === cardId);
         this.props.addPokeDex(pokemonIChoose)
     };
 
@@ -85,8 +84,10 @@ class PokedexPopUpPage extends React.Component{
                     </Container>
                     <CardContainer>
                         {
-                            this.props.pokemon.map(v => <CardPokemon search={this.props.search}  key={v.id}
-                                                                     {...v} onAdd={this.props.onAddPokedex}/>)
+                            this.props.pokemon.map(v =>
+                                <CardPokemon search={this.props.search}  key={v.id} cardId={v.id} isPokedex={false} {...v}
+                                             onAdd={this.onAddPokedex}/>
+                            )
                         }
                     </CardContainer>
                 </Wrapper>
@@ -106,4 +107,4 @@ const mapDispatchToProps = (dispatch)=>({
     addPokeDex: (value) => dispatch(addPokedex(value)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PokedexPopUpPage)
+export default connect(mapStateToProps, mapDispatchToProps)(PokemonsPopUpPage)
