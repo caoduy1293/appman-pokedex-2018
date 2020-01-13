@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import { createSelector } from "reselect";
 
 export const getPokemon = createSelector(
@@ -14,7 +13,7 @@ export const getPokemon = createSelector(
         const filterList = pokemon.filter(({id}) => pokedexIds.indexOf(id) === -1 );
         if(search){
             return filterList.filter(
-                ({name}) => name.toLowerCase().indexOf(search.toLowerCase()) > -1,
+                ({name}) => name.toUpperCase().indexOf(search.toUpperCase()) > -1,
             )
         }
         return filterList

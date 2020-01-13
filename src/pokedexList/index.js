@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import {CardPokemon} from "../pokedexCard";
-import {getPokemons, openPopUp, removePokedex, addPokedex} from "../actions";
+import {removePokedex} from "../actions";
 
 const OverFLow = styled.div`
   flex-wrap: wrap;
