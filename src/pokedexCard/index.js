@@ -99,7 +99,7 @@ export const CardPokemon = ({search='', name='', onDelete, isPokedex = false, im
     const upperSearch = search.toUpperCase();
 
     return (
-        (!search || R.indexOf(upperSearch,upperName) > -1 )&&
+        (!search || upperSearch.indexOf(upperName) > -1 )&&
         <CardWrapper className={ isPokedex ? 'pokedex' : ''}>
             <CardPicture>
                 <img src={imageUrl} alt={''}/>
