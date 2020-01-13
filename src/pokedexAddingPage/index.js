@@ -3,14 +3,18 @@ import React, { Component } from 'react'
 import PokedexList from '../pokedexList'
 
 class PokedexPage extends Component {
-    onRemovePokemon() {
+    onSearchPokemon() {
+
+    }
+
+    onAddPokemonToList() {
 
     }
 
     render() {
         return (
             <>
-                <h1>Pokedex</h1>
+                <input type="text" placeholder={'find pokemon'}/>
                 <PokedexList/>
                 <div className={'add-more-section'}>
                     <button type={'button'}>+</button>
